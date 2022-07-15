@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Dice/Dice.tscn" type="PackedScene" id=2]
+
+[node name="World" type="Node2D"]
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 428, 280 )
+
+[node name="Dice" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 306, 277 )
