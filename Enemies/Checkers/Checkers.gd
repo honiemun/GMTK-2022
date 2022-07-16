@@ -23,19 +23,20 @@ var reached_last_player_pos: bool = true
 var last_pos = global_position
 
 var diceRoll		# The life this enemy has.
-const MAX_ROLL = 6
+const MAX_ROLL = 4
 
 var knockback = Vector2.ZERO
 const friction = 200
 const knockback_power = 250
 var isKnocked = false
-var canMove = true
+var isAttacking = true
 
 func _ready():
 	animationTree.active = true
 	
 	# Roll for STATS
-	diceRoll = enemyHandler.roll_enemy_stats(MAX_ROLL, true)
+	diceRoll = enemyHandler.roll_enemy_stats(MAX_ROLL, false)
+	remove_checkers_piece(diceRoll)
 	debugText.set_text(str(diceRoll))
 	
 	# Get PLAYER and LEVELNAVIGATION
@@ -49,21 +50,22 @@ func _ready():
 		dice = tree.get_nodes_in_group("Dice")[0]
 
 func _physics_process(delta):
-	if canMove:
+	if !isAttacking:
 		animationState.travel("Walk")
-		if !isKnocked:
-			enemyHandler.follow_player(self, player)
-		else:
-			knockback = knockback.move_toward(Vector2.ZERO, friction * delta)
-			knockback = move_and_slide(knockback)
-			if global_position == last_pos:
-				isKnocked = false
-			last_pos = global_position
+	if !isKnocked:
+		enemyHandler.follow_player(self, player)
+	else:
+		knockback = knockback.move_toward(Vector2.ZERO, friction * delta)
+		knockback = move_and_slide(knockback)
+		if global_position == last_pos:
+			isKnocked = false
+		last_pos = global_position
 
 func _on_Hurtbox_area_entered(area):
 	if dice.canAttack:
-		diceRoll -= dice.rawDiceRoll
+		diceRoll -= 1
 		debugText.set_text(str(diceRoll))
+		remove_checkers_piece(diceRoll)
 		
 		if diceRoll <= 0:
 			queue_free()
@@ -73,9 +75,26 @@ func _on_Hurtbox_area_entered(area):
 
 # ATTACK ANIMATIONS
 
+func remove_checkers_piece(numberToRemove):
+	var arrayToRemove = []
+	match numberToRemove:
+		3:
+			arrayToRemove.push_front($BlackCheckerFront)
+		2:
+			arrayToRemove.push_front($BlackCheckerFront)
+			arrayToRemove.push_front($RedCheckerFront)
+		1:
+			arrayToRemove.push_front($BlackCheckerFront)
+			arrayToRemove.push_front($RedCheckerFront)
+			arrayToRemove.push_front($BlackCheckerBase)
+	
+	print(arrayToRemove)
+	for toRemove in arrayToRemove:
+		toRemove.visible = false
+
 func _on_Proximity_area_entered(area):
-	canMove = false
+	isAttacking = true
 	animationState.travel("Attack")
 
 func attack_finished():
-	canMove = true
+	isAttacking = false
