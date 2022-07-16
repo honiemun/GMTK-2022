@@ -10,7 +10,8 @@ config_version=4
 
 [application]
 
-config/name="GMTK 2022"
+config/name="Sweep the Board"
+config/description="A Honieware game for the GMTK Game Jam 2022."
 run/main_scene="res://World/World.tscn"
 config/icon="res://icon.png"
 

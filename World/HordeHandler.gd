@@ -20,6 +20,7 @@ var hordes = [
 ]
 
 var currentHorde = 0
+var startingEnemies = 0
 
 func _ready():
 	spawn_new_horde()
@@ -32,6 +33,7 @@ func _process(delta):
 
 func spawn_new_horde():
 	if currentHorde + 1 <= len(hordes):
+		startingEnemies = len(hordes[currentHorde])
 		for enemy in hordes[currentHorde]:
 			create_enemy(enemy)
 
@@ -54,4 +56,4 @@ func generate_enemy_coords():
 
 func enemy_defeated():
 	hordes[currentHorde].pop_back()
-	print("/" + str(len(hordes[currentHorde])))
+	print(str(len(hordes[currentHorde])) + "/" + str(startingEnemies))
