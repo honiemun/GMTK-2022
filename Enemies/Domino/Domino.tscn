@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Enemies/Domino/domino.png" type="Texture" id=1]
 [ext_resource path="res://Enemies/Domino/Domino.gd" type="Script" id=2]
+[ext_resource path="res://World/Assets/Shadow.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -13,8 +14,12 @@ radius = 15.0
 height = 34.0
 
 [node name="Domino" type="KinematicBody2D" groups=["Enemy"]]
+position = Vector2( 0, -35 )
 collision_mask = 9
 script = ExtResource( 2 )
+
+[node name="Shadow" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, 35 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
