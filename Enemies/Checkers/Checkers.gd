@@ -12,6 +12,7 @@ onready var los = $LineOfSight
 onready var debugText = $DebugText
 onready var tree = get_tree()
 onready var enemyHandler = tree.get_nodes_in_group("EnemyHandler")[0]
+onready var hordeHandler = tree.get_nodes_in_group("HordeHandler")[0]
 
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
@@ -69,6 +70,7 @@ func _on_Hurtbox_area_entered(area):
 		
 		if diceRoll <= 0:
 			queue_free()
+			hordeHandler.enemy_defeated()
 		else:
 			isKnocked = true
 			knockback = dice.global_position.direction_to(global_position) * knockback_power

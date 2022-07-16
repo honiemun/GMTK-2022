@@ -198,7 +198,7 @@ text = "6"
 align = 1
 script = ExtResource( 8 )
 
-[node name="HordeHandler" type="Node2D" parent="."]
+[node name="HordeHandler" type="Node2D" parent="." groups=["HordeHandler"]]
 script = ExtResource( 6 )
 
 [node name="EnemyHandler" type="Node2D" parent="." groups=["EnemyHandler"]]

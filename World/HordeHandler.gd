@@ -11,17 +11,29 @@ var polycar  = "res://Enemies/Poly Car/PolyCar.tscn"
 var rng = RandomNumberGenerator.new()
 	
 var hordes = [
-	[
-		domino, checkers,domino, domino, domino, checkers,domino, domino, domino, checkers
-	],
-	[
-		domino, domino, domino, checkers
-	]
+	[domino, domino, domino],
+	[domino, domino, domino, checkers],
+	[domino, domino, checkers, checkers, checkers],
+	[polycar],
+	[domino, domino, domino, domino, checkers, polycar],
+	[polycar, polycar, polycar, polycar]
 ]
 
+var currentHorde = 0
+
 func _ready():
-	for enemy in hordes[0]:
-		create_enemy(enemy)
+	spawn_new_horde()
+
+func _process(delta):
+	if currentHorde + 1 <= len(hordes):
+		if !hordes[currentHorde]:
+			currentHorde += 1
+			spawn_new_horde()
+
+func spawn_new_horde():
+	if currentHorde + 1 <= len(hordes):
+		for enemy in hordes[currentHorde]:
+			create_enemy(enemy)
 
 func create_enemy(enemy):
 	var enemyScene = load(enemy).instance()
@@ -39,3 +51,7 @@ func generate_enemy_coords():
 		generatedPosition = Vector2(x, y)
 	
 	return generatedPosition
+
+func enemy_defeated():
+	hordes[currentHorde].pop_back()
+	print("/" + str(len(hordes[currentHorde])))
