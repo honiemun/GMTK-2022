@@ -50,11 +50,11 @@ func _physics_process(delta):
 		RETRACT:
 			retract_state(delta)
 			
-	if Input.is_action_just_pressed("retract") && state == ATTACK:
+	if Input.is_action_just_pressed("retract") && state == ATTACK && t > ATTACK_DURATION:
 		retractTimer.start()
 		state = RETRACT
 		
-	if Input.is_action_just_pressed("attack"):
+	if Input.is_action_just_pressed("attack") && state != ATTACK:
 		retractTimer.stop()
 		roll_dice()
 		define_bezier_variables()
@@ -75,9 +75,10 @@ func roll_dice():
 	print("Rolled a " + str(diceRoll))
 
 func add_to_dice(mod):
-	modifier += mod
-	diceRoll += modifier
-	debugText.set_text(str(diceRoll))
+	if diceRoll and rawDiceRoll:
+		modifier += mod
+		diceRoll += modifier
+		debugText.set_text(str(diceRoll))
 
 func move_towards_curve(delta):
 	# Move from initialPosition to finalPosition, taking into account curvePosition

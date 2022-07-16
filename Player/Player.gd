@@ -14,13 +14,17 @@ const friction     = 1000
 
 onready var dice = get_parent().get_node("Dice")
 
+func _ready():
+	set_process(true)
+	
 func _physics_process(delta):
+	update()
 	
 	match state:
 		MOVE:
 			move_state(delta)
-		ATTACK:
-			attack_state()
+
+# States
 
 func move_state(delta):
 	var input_vector = Vector2.ZERO
@@ -34,11 +38,6 @@ func move_state(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 	move()
 
-# States
-
-func attack_state():
-	velocity = Vector2.ZERO
-
 func move():
 	velocity = move_and_slide(velocity)
 
@@ -46,3 +45,8 @@ func move():
 
 func attack_animation_finished():
 	state = MOVE
+
+# Line drawing
+
+#func _draw():
+#	draw_line(Vector2(0,0), dice.mouse_position_clamped_radius(Vector2(0,0)), Color(255, 0, 0), 1)
