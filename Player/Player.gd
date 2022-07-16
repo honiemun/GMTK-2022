@@ -12,7 +12,7 @@ const max_speed    = 360
 const acceleration = 1000
 const friction     = 1000
 
-onready var dice = get_parent().get_node("Dice")
+onready var dice = get_tree().get_nodes_in_group("Dice")[0]
 
 func _ready():
 	set_process(true)

@@ -35,7 +35,7 @@ const RETRACT_DURATION = 1.5
 const RADIUS = 250
 
 # OTHER NODES
-onready var player = get_parent().get_node("Player")
+onready var player = get_tree().get_nodes_in_group("Player")[0]
 onready var sprite = $Sprite
 onready var retractTimer = $RetractTimer
 onready var debugText = $DebugText
