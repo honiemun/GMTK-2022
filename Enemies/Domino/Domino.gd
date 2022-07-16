@@ -95,7 +95,7 @@ func move():
 
 func _on_Hurtbox_area_entered(area):
 	# If dice is lower than life:
-	if dice.state != dice.FOLLOW:
+	if dice.canAttack:
 		if dice.rawDiceRoll > diceRoll:
 			queue_free()
 		else:

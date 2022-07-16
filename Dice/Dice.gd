@@ -30,9 +30,10 @@ var t = 0.0
 
 # ATTACKS
 
-const ATTACK_DURATION = 0.8
+const ATTACK_DURATION = 0.7
 const RETRACT_DURATION = 1.5
 const RADIUS = 250
+var canAttack = false
 
 # OTHER NODES
 onready var player = get_tree().get_nodes_in_group("Player")[0]
@@ -59,7 +60,8 @@ func _physics_process(delta):
 		roll_dice()
 		define_bezier_variables()
 		state = ATTACK
-		
+	
+	determine_attack()
 
 
 func follow_state(delta):
@@ -67,6 +69,17 @@ func follow_state(delta):
 
 func attack_state(delta):
 	move_towards_curve(delta)
+
+func retract_state(delta):
+	sprite.rotation += 8 * delta
+	follow_player(delta, FOLLOW_SPEED * 1.5)
+	
+	var playerPosition = player.position - Vector2(0, FOLLOW_OFFSET)
+	if position.distance_to(playerPosition) < 30:
+		state = FOLLOW
+	
+func _on_RetractTimer_timeout():
+	state = FOLLOW
 
 func roll_dice():
 	rawDiceRoll = rng.randi_range(1, MAX_DICE_ROLL)
@@ -88,17 +101,12 @@ func move_towards_curve(delta):
 	var q1 = curvePosition.linear_interpolate(finalPosition, min(t, 1.0))
 	position = q0.linear_interpolate(q1, min(t, 1.0))
 
-func retract_state(delta):
-	sprite.rotation += 8 * delta
-	follow_player(delta, FOLLOW_SPEED * 1.5)
-	
-	var playerPosition = player.position - Vector2(0, FOLLOW_OFFSET)
-	if position.distance_to(playerPosition) < 30:
-		state = FOLLOW
-	
-func _on_RetractTimer_timeout():
-	state = FOLLOW
-	
+func determine_attack():
+	if state == ATTACK && t <= ATTACK_DURATION * 1.3 || state == RETRACT:
+		canAttack = true
+	else:
+		canAttack = false
+
 func follow_player(delta, followSpeed):
 	position = position.linear_interpolate(player.position - Vector2(0, FOLLOW_OFFSET), delta * followSpeed)
 
