@@ -2,12 +2,14 @@ extends KinematicBody2D
 
 enum {
 	MOVE,
+	HURT,
 	DEAD
 }
 
 var health = 6
 
 var state          = MOVE
+var canBeHurt      = true
 var velocity       = Vector2.ZERO
 
 const max_speed    = 360
@@ -19,6 +21,11 @@ onready var camera = $Camera2D
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
+
+var knockback = Vector2.ZERO
+const knockback_power = 400
+var isKnocked = false
+var last_pos = global_position
 
 signal player_hit
 
@@ -32,6 +39,8 @@ func _physics_process(delta):
 	match state:
 		MOVE:
 			move_state(delta)
+		HURT:
+			hurt_state(delta)
 
 # States
 
@@ -43,11 +52,18 @@ func move_state(delta):
 	
 	if input_vector != Vector2.ZERO:
 		velocity = velocity.move_toward(input_vector * max_speed, acceleration * delta)
-		animationState.travel("run")
+		animationState.travel("walk")
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
 		animationState.travel("idle")
 	move()
+
+func hurt_state(delta):
+	knockback = knockback.move_toward(Vector2.ZERO, friction * delta)
+	knockback = move_and_slide(knockback)
+	if global_position == last_pos:
+		isKnocked = false
+	last_pos = global_position
 
 func move():
 	velocity = move_and_slide(velocity)
@@ -59,13 +75,24 @@ func move():
 
 
 func _on_Hitbox_area_entered(area):
-	if state != DEAD:
+	if state != DEAD && canBeHurt:
+		canBeHurt = false
 		var enemy = area.get_parent()
 		if "diceRoll" in enemy:
 			health -= enemy.diceRoll
 			emit_signal("player_hit", health)
-			if health <= 0:
+			if health > 0:
+				state = HURT
+				$InvincibilityFrames.start()
+				knockback = enemy.global_position.direction_to(global_position) * knockback_power
+				animationState.travel("hurt")
+			else:
 				state = DEAD
 				animationState.travel("dead")
-			else:
-				animationState.travel("hit")
+
+
+func _on_InvincibilityFrames_timeout():
+	canBeHurt = true
+
+func _on_Hurt_Endframe():
+	state = MOVE

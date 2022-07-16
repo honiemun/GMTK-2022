@@ -202,6 +202,44 @@ tracks/2/keys = {
 "update": 0,
 "values": [ 0.0, 7.8, 0.0 ]
 }
+tracks/3/type = "value"
+tracks/3/path = NodePath("ShadowSprite:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, -9 ), Vector2( 0, -8 ), Vector2( 0, -9 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ShadowSprite:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 0.9, 0.9 ), Vector2( 1, 1 ) ]
+}
+tracks/5/type = "method"
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_Hurt_Endframe"
+} ]
+}
 
 [sub_resource type="Animation" id=20]
 resource_name = "idle"
@@ -321,17 +359,17 @@ animation = "walk"
 
 [sub_resource type="AnimationNodeStateMachine" id=31]
 states/dead/node = SubResource( 22 )
-states/dead/position = Vector2( 341, 77 )
+states/dead/position = Vector2( 322, 77 )
 states/hurt/node = SubResource( 23 )
-states/hurt/position = Vector2( 190, 143 )
+states/hurt/position = Vector2( 55, 77 )
 states/idle/node = SubResource( 24 )
 states/idle/position = Vector2( 190, 77 )
 states/walk/node = SubResource( 25 )
-states/walk/position = Vector2( 190, 16 )
+states/walk/position = Vector2( 190, 0 )
 transitions = [ "idle", "hurt", SubResource( 29 ), "idle", "dead", SubResource( 30 ), "idle", "walk", SubResource( 33 ), "walk", "idle", SubResource( 34 ), "hurt", "idle", SubResource( 35 ) ]
 start_node = "idle"
 end_node = "dead"
-graph_offset = Vector2( -112, -24 )
+graph_offset = Vector2( -112, -62 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=32]
 
@@ -388,6 +426,12 @@ anims/walk = SubResource( 21 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 31 )
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/playback = SubResource( 32 )
 
+[node name="InvincibilityFrames" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
+[connection signal="timeout" from="InvincibilityFrames" to="." method="_on_InvincibilityFrames_timeout"]
