@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 enum {
 	MOVE,
-	ATTACK
+	DEAD
 }
 
 var health = 6
@@ -15,11 +15,16 @@ const acceleration = 1000
 const friction     = 1000
 
 onready var dice = get_tree().get_nodes_in_group("Dice")[0]
+onready var camera = $Camera2D
+onready var animationPlayer = $AnimationPlayer
+onready var animationTree = $AnimationTree
+onready var animationState = animationTree.get("parameters/playback")
 
 signal player_hit
 
 func _ready():
 	set_process(true)
+	animationTree.active = true
 	
 func _physics_process(delta):
 	update()
@@ -38,17 +43,14 @@ func move_state(delta):
 	
 	if input_vector != Vector2.ZERO:
 		velocity = velocity.move_toward(input_vector * max_speed, acceleration * delta)
+		animationState.travel("run")
 	else:
 		velocity = velocity.move_toward(Vector2.ZERO, friction * delta)
+		animationState.travel("idle")
 	move()
 
 func move():
 	velocity = move_and_slide(velocity)
-
-# Animations
-
-func attack_animation_finished():
-	state = MOVE
 
 # Line drawing
 
@@ -57,9 +59,13 @@ func attack_animation_finished():
 
 
 func _on_Hitbox_area_entered(area):
-	var enemy = area.get_parent()
-	if "diceRoll" in enemy:
-		health -= enemy.diceRoll
-		emit_signal("player_hit", health)
-		#if health <= 0:
-			#queue_free()
+	if state != DEAD:
+		var enemy = area.get_parent()
+		if "diceRoll" in enemy:
+			health -= enemy.diceRoll
+			emit_signal("player_hit", health)
+			if health <= 0:
+				state = DEAD
+				animationState.travel("dead")
+			else:
+				animationState.travel("hit")
