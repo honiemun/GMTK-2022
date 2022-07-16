@@ -1,14 +1,18 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Dice/dice.png" type="Texture" id=1]
 [ext_resource path="res://Dice/Dice.gd" type="Script" id=2]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 6.0
+height = 14.0
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 23.0217
 
 [node name="Dice" type="KinematicBody2D"]
 collision_layer = 0
-collision_mask = 0
+collision_mask = 8
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -19,12 +23,18 @@ wait_time = 0.8
 one_shot = true
 
 [node name="DebugText" type="RichTextLabel" parent="."]
+modulate = Color( 0, 0, 0, 1 )
 margin_left = -4.0
-margin_top = -6.0
+margin_top = -9.0
 margin_right = 28.0
-margin_bottom = 24.0
+margin_bottom = 21.0
 text = "0
 "
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 13 )
+rotation = 1.5708
+shape = SubResource( 2 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 0

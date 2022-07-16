@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/dice.png-7d40d336ea953745a0cb7e6b27285c8a.stex"
+path="res://.import/domino.png-79abd43e540a9f3bfde50dc1691e29bb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Dice/dice.png"
-dest_files=[ "res://.import/dice.png-7d40d336ea953745a0cb7e6b27285c8a.stex" ]
+source_file="res://Enemies/Domino/domino.png"
+dest_files=[ "res://.import/domino.png-79abd43e540a9f3bfde50dc1691e29bb.stex" ]
 
 [params]
 
