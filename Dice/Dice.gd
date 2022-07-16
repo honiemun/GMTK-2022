@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+# STATE MACHINE
 enum {
 	FOLLOW,
 	ATTACK,
@@ -8,22 +9,36 @@ enum {
 
 var state = FOLLOW
 
-onready var player = get_parent().get_node("Player")
-onready var sprite = $Sprite
-onready var retractTimer = $RetractTimer
+# DICE ROLLS
+var rng = RandomNumberGenerator.new()
+var rawDiceRoll 	# The original dice roll from one to six.
+var diceRoll		# The raw dice roll + any modifiers.
+var modifier = 0	# Modifiers that change the dice roll.
 
-const FOLLOW_SPEED = 4.0
-const FOLLOW_OFFSET = -10
+const MAX_DICE_ROLL = 6
+
+# TRAVERSAL ANIMATIONS
 
 var initialPosition
 var finalPosition
 var curvePosition
 
+const FOLLOW_SPEED = 4.0
+const FOLLOW_OFFSET = -10
+
 var t = 0.0
+
+# ATTACKS
+
 const ATTACK_DURATION = 0.8
 const RETRACT_DURATION = 1.5
-
 const RADIUS = 250
+
+# OTHER NODES
+onready var player = get_parent().get_node("Player")
+onready var sprite = $Sprite
+onready var retractTimer = $RetractTimer
+onready var debugText = $DebugText
 
 func _physics_process(delta):
 	
@@ -31,7 +46,7 @@ func _physics_process(delta):
 		FOLLOW:
 			follow_state(delta)
 		ATTACK:
-			attack_state(delta, initialPosition, finalPosition, curvePosition)
+			attack_state(delta)
 		RETRACT:
 			retract_state(delta)
 			
@@ -41,6 +56,7 @@ func _physics_process(delta):
 		
 	if Input.is_action_just_pressed("attack"):
 		retractTimer.stop()
+		roll_dice()
 		define_bezier_variables()
 		state = ATTACK
 		
@@ -49,7 +65,21 @@ func _physics_process(delta):
 func follow_state(delta):
 	follow_player(delta, FOLLOW_SPEED)
 
-func attack_state(delta, initialPosition, finalPosition, curvePosition):
+func attack_state(delta):
+	move_towards_curve(delta)
+
+func roll_dice():
+	rawDiceRoll = rng.randi_range(1, MAX_DICE_ROLL)
+	diceRoll = rawDiceRoll
+	debugText.set_text(str(diceRoll))
+	print("Rolled a " + str(diceRoll))
+
+func add_to_dice(mod):
+	modifier += mod
+	diceRoll += modifier
+	debugText.set_text(str(diceRoll))
+
+func move_towards_curve(delta):
 	# Move from initialPosition to finalPosition, taking into account curvePosition
 	t += delta / ATTACK_DURATION
 	
