@@ -5,6 +5,8 @@ enum {
 	ATTACK
 }
 
+var health = 6
+
 var state          = MOVE
 var velocity       = Vector2.ZERO
 
@@ -13,6 +15,8 @@ const acceleration = 1000
 const friction     = 1000
 
 onready var dice = get_tree().get_nodes_in_group("Dice")[0]
+
+signal player_hit
 
 func _ready():
 	set_process(true)
@@ -50,3 +54,12 @@ func attack_animation_finished():
 
 #func _draw():
 #	draw_line(Vector2(0,0), dice.mouse_position_clamped_radius(Vector2(0,0)), Color(255, 0, 0), 1)
+
+
+func _on_Hitbox_area_entered(area):
+	var enemy = area.get_parent()
+	if "diceRoll" in enemy:
+		health -= enemy.diceRoll
+		emit_signal("player_hit", health)
+		#if health <= 0:
+			#queue_free()
