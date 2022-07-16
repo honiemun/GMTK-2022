@@ -1,5 +1,6 @@
 extends KinematicBody2D
-export(int) var SPEED: int = 100
+export(int) var SPEED: int = 200
+var og_speed = SPEED
 var velocity: Vector2 = Vector2.ZERO
 
 var path: Array = []	# Contains destination positions
@@ -16,6 +17,7 @@ onready var enemyHandler = tree.get_nodes_in_group("EnemyHandler")[0]
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
+onready var sprite = $Sprite
 
 var last_spotted_player_pos: Vector2 = Vector2.ZERO
 var reached_last_player_pos: bool = true
@@ -29,14 +31,14 @@ var knockback = Vector2.ZERO
 const friction = 200
 const knockback_power = 250
 var isKnocked = false
-var isAttacking = true
+var canMove = true
+var isOnBoost = false
 
 func _ready():
 	animationTree.active = true
 	
 	# Roll for STATS
-	diceRoll = enemyHandler.roll_enemy_stats(MAX_ROLL, false)
-	remove_checkers_piece(diceRoll)
+	diceRoll = enemyHandler.roll_enemy_stats(MAX_ROLL, true)
 	debugText.set_text(str(diceRoll))
 	
 	# Get PLAYER and LEVELNAVIGATION
@@ -50,8 +52,8 @@ func _ready():
 		dice = tree.get_nodes_in_group("Dice")[0]
 
 func _physics_process(delta):
-	if !isAttacking:
-		animationState.travel("Walk")
+	if !isOnBoost:
+		animationState.travel("Idle")
 	if !isKnocked:
 		enemyHandler.follow_player(self, player)
 	else:
@@ -63,9 +65,8 @@ func _physics_process(delta):
 
 func _on_Hurtbox_area_entered(area):
 	if dice.canAttack:
-		diceRoll -= 1
+		diceRoll -= dice.rawDiceRoll
 		debugText.set_text(str(diceRoll))
-		remove_checkers_piece(diceRoll)
 		
 		if diceRoll <= 0:
 			queue_free()
@@ -75,26 +76,11 @@ func _on_Hurtbox_area_entered(area):
 
 # ATTACK ANIMATIONS
 
-func remove_checkers_piece(numberToRemove):
-	var arrayToRemove = []
-	match numberToRemove:
-		3:
-			arrayToRemove.push_front($BlackCheckerFront)
-		2:
-			arrayToRemove.push_front($BlackCheckerFront)
-			arrayToRemove.push_front($RedCheckerFront)
-		1:
-			arrayToRemove.push_front($BlackCheckerFront)
-			arrayToRemove.push_front($RedCheckerFront)
-			arrayToRemove.push_front($BlackCheckerBase)
-	
-	print(arrayToRemove)
-	for toRemove in arrayToRemove:
-		toRemove.visible = false
-
 func _on_Proximity_area_entered(area):
-	isAttacking = true
+	isOnBoost = true
+	SPEED = 400
 	animationState.travel("Attack")
 
 func attack_finished():
-	isAttacking = false
+	isOnBoost = false
+	SPEED = 200

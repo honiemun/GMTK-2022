@@ -1,15 +1,14 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Enemies/Dice.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Hoop/Hoop.tscn" type="PackedScene" id=3]
 [ext_resource path="res://World/Assets/protoroom.png" type="Texture" id=4]
 [ext_resource path="res://World/Assets/tileset.png" type="Texture" id=5]
-[ext_resource path="res://Enemies/Domino/Domino.tscn" type="PackedScene" id=6]
+[ext_resource path="res://World/HordeHandler.gd" type="Script" id=6]
 [ext_resource path="res://World/EnemyHandler.gd" type="Script" id=7]
 [ext_resource path="res://UI/HealthLabel.gd" type="Script" id=8]
 [ext_resource path="res://UI/Cursor/Cursor.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Enemies/Checkers/Checkers.tscn" type="PackedScene" id=10]
 
 [sub_resource type="StyleBoxFlat" id=17]
 bg_color = Color( 0.137255, 0.145098, 0.133333, 0.721569 )
@@ -199,6 +198,9 @@ text = "6"
 align = 1
 script = ExtResource( 8 )
 
+[node name="HordeHandler" type="Node2D" parent="."]
+script = ExtResource( 6 )
+
 [node name="EnemyHandler" type="Node2D" parent="." groups=["EnemyHandler"]]
 script = ExtResource( 7 )
 
@@ -215,13 +217,11 @@ position = Vector2( 600, 24 )
 position = Vector2( 520, 8 )
 
 [node name="Hoop" parent="YSort" instance=ExtResource( 3 )]
+visible = false
 position = Vector2( 904, -16 )
 
 [node name="Enemies" type="YSort" parent="YSort"]
 position = Vector2( 704, 64 )
-
-[node name="Domino2" parent="YSort/Enemies" instance=ExtResource( 6 )]
-position = Vector2( -376, 16 )
 
 [node name="LevelNavigation" type="Navigation2D" parent="." groups=["LevelNavigation"]]
 
@@ -237,16 +237,8 @@ tile_data = PoolIntArray( -2490355, 1073741824, 0, -2490354, 1073741824, 0, -249
 
 [node name="Cursor" parent="." instance=ExtResource( 9 )]
 
-[node name="Domino" parent="." instance=ExtResource( 10 )]
-position = Vector2( 720, 117 )
-
-[node name="Checkers" parent="." instance=ExtResource( 10 )]
-position = Vector2( 456, 229 )
-
-[node name="Checkers2" parent="." instance=ExtResource( 10 )]
-position = Vector2( 304, -163 )
-
-[node name="Checkers3" parent="." instance=ExtResource( 10 )]
-position = Vector2( 736, -171 )
+[node name="SpawnArea" type="Polygon2D" parent="."]
+visible = false
+polygon = PoolVector2Array( 128, -176, 128, 160, 48, 224, 56, 424, 432, 424, 624, 424, 624, 240, 1008, 240, 1008, 176, 1008, 40, 1008, -8, 976, -40, 944, -88, 928, -256, 752, -256, 704, -408, 1040, -408, 1048, -440, 1296, -448, 1296, -512, 1192, -568, 232, -560, 128, -472, 128, -336, 232, -336, 320, -408, 608, -400, 552, -248, 344, -240, 264, -184 )
 
 [connection signal="player_hit" from="YSort/Player" to="HUD/HealthLabel" method="_on_Player_player_hit"]

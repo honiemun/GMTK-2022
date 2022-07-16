@@ -12,7 +12,8 @@
 radius = 80.025
 
 [sub_resource type="CapsuleShape2D" id=4]
-radius = 22.0
+radius = 32.0
+height = 32.0
 
 [sub_resource type="CapsuleShape2D" id=3]
 radius = 15.0
@@ -349,8 +350,9 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="LineOfSight" type="RayCast2D" parent="."]
+position = Vector2( 0, 27 )
 enabled = true
-cast_to = Vector2( 300, 0 )
+cast_to = Vector2( 200, 0 )
 collision_mask = 12
 
 [node name="DebugText" type="RichTextLabel" parent="."]
@@ -375,7 +377,7 @@ collision_layer = 0
 collision_mask = 36
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-position = Vector2( -2, -27 )
+position = Vector2( -2, -11 )
 shape = SubResource( 4 )
 disabled = true
 
