@@ -74,21 +74,22 @@ func move():
 #	draw_line(Vector2(0,0), dice.mouse_position_clamped_radius(Vector2(0,0)), Color(255, 0, 0), 1)
 
 func _on_Hitbox_area_entered(area):
-	var enemy = area.get_parent()
-	if state != DEAD && canBeHurt && area.is_in_group("EnemyHitbox"):
-		canBeHurt = false
-		if "diceRoll" in enemy:
-			#health -= enemy.diceRoll
-			health -= 1
-			emit_signal("player_hit", health)
-			if health > 0:
-				state = HURT
-				$InvincibilityFrames.start()
-				knockback = enemy.global_position.direction_to(global_position) * knockback_power
-				animationState.travel("hurt")
-			else:
-				state = DEAD
-				animationState.travel("dead")
+	if area.get_name() == "Hurtbox":
+		if state != DEAD && canBeHurt:
+			canBeHurt = false
+			var enemy = area.get_parent()
+			if "diceRoll" in enemy:
+				#health -= enemy.diceRoll
+				health -= 1
+				emit_signal("player_hit", health)
+				if health > 0:
+					state = HURT
+					$InvincibilityFrames.start()
+					knockback = enemy.global_position.direction_to(global_position) * knockback_power
+					animationState.travel("hurt")
+				else:
+					state = DEAD
+					animationState.travel("dead")
 
 
 func _on_InvincibilityFrames_timeout():
