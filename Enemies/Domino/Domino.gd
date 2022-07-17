@@ -10,6 +10,7 @@ var player_spotted: bool = false
 
 onready var los = $LineOfSight
 onready var debugText = $DebugText
+onready var face = $Sprite/DiceNumber
 onready var tree = get_tree()
 onready var enemyHandler = tree.get_nodes_in_group("EnemyHandler")[0]
 onready var hordeHandler = tree.get_nodes_in_group("HordeHandler")[0]
@@ -60,6 +61,8 @@ func _physics_process(delta):
 			if global_position == last_pos:
 				isKnocked = false
 			last_pos = global_position
+		determine_facing()
+	set_dice_animation()
 
 func _on_Hurtbox_area_entered(area):
 	if dice:
@@ -76,6 +79,23 @@ func _on_Hurtbox_area_entered(area):
 				knockback = dice.global_position.direction_to(global_position) * knockback_power
 
 # ATTACK ANIMATIONS
+
+func determine_facing():
+	var input_vector
+	
+	if player:
+		if player.global_position.x > global_position.x:
+			input_vector = 1
+		else:
+			input_vector = -1
+		
+		animationTree.set("parameters/Walk/blend_position", input_vector)
+		animationTree.set("parameters/Attack/blend_position", input_vector)
+
+func set_dice_animation():
+	face.animation = "Dice"
+	if diceRoll:
+		face.frame = diceRoll - 1
 
 func _on_Proximity_area_entered(area):
 	canMove = false

@@ -19,28 +19,28 @@
 
 [sub_resource type="SpriteFrames" id=3]
 animations = [ {
-"frames": [ ExtResource( 1 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 6 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "Roll",
 "speed": 20.0
+}, {
+"frames": [ ExtResource( 1 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 5.0
 } ]
 
 [sub_resource type="SpriteFrames" id=5]
 animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 12 ) ],
-"loop": true,
-"name": "Face",
-"speed": 1.0
-}, {
 "frames": [ ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 13 ), ExtResource( 14 ) ],
 "loop": true,
 "name": "Dice",
 "speed": 0.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 12 ) ],
+"loop": true,
+"name": "Face",
+"speed": 1.0
 } ]
 
 [sub_resource type="CapsuleShape2D" id=2]
@@ -61,6 +61,7 @@ script = ExtResource( 2 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )
 animation = "Roll"
+frame = 1
 playing = true
 
 [node name="Face" type="AnimatedSprite" parent="Sprite"]
