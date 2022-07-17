@@ -61,7 +61,7 @@ script = ExtResource( 2 )
 [node name="Sprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 3 )
 animation = "Roll"
-frame = 1
+frame = 2
 playing = true
 
 [node name="Face" type="AnimatedSprite" parent="Sprite"]

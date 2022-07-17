@@ -31,7 +31,7 @@ animations = [ {
 animations = [ {
 "frames": [ ExtResource( 9 ), ExtResource( 11 ), ExtResource( 7 ), ExtResource( 12 ), ExtResource( 8 ), ExtResource( 10 ) ],
 "loop": true,
-"name": "dICE",
+"name": "Dice",
 "speed": 5.0
 } ]
 
@@ -846,13 +846,12 @@ texture = ExtResource( 1 )
 position = Vector2( 1, 29 )
 frames = SubResource( 14 )
 animation = "Run"
-frame = 1
 playing = true
 
 [node name="DiceNumber" type="AnimatedSprite" parent="Sprite"]
 position = Vector2( -1, 11 )
 frames = SubResource( 16 )
-animation = "dICE"
+animation = "Dice"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 24 )
