@@ -34,6 +34,7 @@ signal attack_starts
 func _ready():
 	set_process(true)
 	animationTree.active = true
+	global_position = Vector2(600, 25)
 	
 func _physics_process(delta):
 	update()
