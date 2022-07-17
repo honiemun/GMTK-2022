@@ -356,6 +356,7 @@ cast_to = Vector2( 200, 0 )
 collision_mask = 12
 
 [node name="DebugText" type="RichTextLabel" parent="."]
+visible = false
 modulate = Color( 0, 0, 0, 1 )
 margin_top = -53.0
 margin_right = 16.0

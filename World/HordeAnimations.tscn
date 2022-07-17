@@ -1,0 +1,278 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://UI/Horde Text/Defeated/defeated-1.png" type="Texture" id=1]
+[ext_resource path="res://UI/Horde Text/Defeated/defeated-2.png" type="Texture" id=2]
+[ext_resource path="res://UI/Horde Text/Prepare/prepare-7.png" type="Texture" id=3]
+[ext_resource path="res://World/Assets/tiledbg.png" type="Texture" id=4]
+[ext_resource path="res://UI/Horde Text/Defeated/defeated-7.png" type="Texture" id=5]
+[ext_resource path="res://UI/Horde Text/Defeated/defeated-8.png" type="Texture" id=6]
+[ext_resource path="res://UI/Horde Text/Defeated/defeated-6.png" type="Texture" id=7]
+[ext_resource path="res://UI/Horde Text/Prepare/prepare-3.png" type="Texture" id=8]
+[ext_resource path="res://UI/Horde Text/Prepare/prepare-5.png" type="Texture" id=9]
+[ext_resource path="res://UI/Horde Text/Defeated/defeated-3.png" type="Texture" id=10]
+[ext_resource path="res://UI/Horde Text/Prepare/prepare-4.png" type="Texture" id=11]
+[ext_resource path="res://UI/Horde Text/Defeated/defeated-4.png" type="Texture" id=12]
+[ext_resource path="res://UI/Horde Text/Defeated/defeated-5.png" type="Texture" id=13]
+[ext_resource path="res://UI/Horde Text/Prepare/prepare-1.png" type="Texture" id=14]
+[ext_resource path="res://UI/Horde Text/Prepare/prepare-2.png" type="Texture" id=15]
+[ext_resource path="res://UI/Horde Text/Prepare/prepare-6.png" type="Texture" id=16]
+[ext_resource path="res://World/HordeAnimations.gd" type="Script" id=17]
+
+[sub_resource type="SpriteFrames" id=18]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ) ],
+"loop": false,
+"name": "Fall",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "Still",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 10 ) ],
+"loop": false,
+"name": "Rise",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=19]
+animations = [ {
+"frames": [ ExtResource( 16 ), ExtResource( 3 ) ],
+"loop": false,
+"name": "Fall",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 8 ), ExtResource( 11 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "Still",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 14 ), ExtResource( 15 ) ],
+"loop": false,
+"name": "Rise",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=20]
+resource_name = "Defeated"
+length = 3.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("TiledBG2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 2.6, 3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 0.811765 ), Color( 1, 1, 1, 0.811765 ), Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TiledBG2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HordeDefeated:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 2.75, 2.85 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "Rise", "Still", "Still", "Fall" ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Prepare:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("HordeDefeated:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Prepare:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.1, 2.75, 2.85 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ "Rise", "Still", "Still", "Fall" ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 2.65 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "spawn_new_horde"
+} ]
+}
+
+[sub_resource type="Animation" id=21]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("TiledBG2:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("TiledBG2:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("HordeDefeated:animation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "Rise" ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Prepare:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("HordeDefeated:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Prepare:animation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "Rise" ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=24]
+animation = "Defeated"
+
+[sub_resource type="AnimationNodeAnimation" id=25]
+animation = "RESET"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+
+[sub_resource type="AnimationNodeStateMachine" id=22]
+states/Defeated/node = SubResource( 24 )
+states/Defeated/position = Vector2( 411, 37 )
+states/RESET/node = SubResource( 25 )
+states/RESET/position = Vector2( 220, 37 )
+transitions = [ "RESET", "Defeated", SubResource( 26 ), "Defeated", "RESET", SubResource( 27 ) ]
+start_node = "RESET"
+graph_offset = Vector2( -8, -31 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
+
+[node name="HordeAnimations" type="Node2D"]
+script = ExtResource( 17 )
+
+[node name="TiledBG2" type="Sprite" parent="."]
+visible = false
+modulate = Color( 1, 1, 1, 0 )
+position = Vector2( 427, 240 )
+texture = ExtResource( 4 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 854, 480 )
+
+[node name="HordeDefeated" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 432, 240 )
+frames = SubResource( 18 )
+animation = "Rise"
+frame = 2
+playing = true
+
+[node name="Prepare" type="AnimatedSprite" parent="."]
+visible = false
+position = Vector2( 424, 224 )
+frames = SubResource( 19 )
+animation = "Rise"
+frame = 1
+playing = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Defeated = SubResource( 20 )
+anims/RESET = SubResource( 21 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 22 )
+anim_player = NodePath("../AnimationPlayer")
+parameters/playback = SubResource( 23 )

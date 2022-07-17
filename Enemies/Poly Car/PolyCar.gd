@@ -55,7 +55,9 @@ func _ready():
 		dice = tree.get_nodes_in_group("Dice")[0]
 
 func _physics_process(delta):
+
 	if !isOnBoost:
+		get_input_vector()
 		animationState.travel("Idle")
 	if !isKnocked:
 		enemyHandler.follow_player(self, player)
@@ -65,6 +67,30 @@ func _physics_process(delta):
 		if global_position == last_pos:
 			isKnocked = false
 		last_pos = global_position
+
+func get_input_vector():
+	var input_vector
+	var rotation = fmod(los.rotation_degrees, 360)
+	print(-rotation)
+	# SPAGHETTI
+	if rotation >= 337.5 && rotation < 22.5 || rotation < 0:
+		input_vector = Vector2(1, 0) # RIGHT
+	elif rotation >= 22.5 && rotation < 67.5:
+		input_vector = Vector2(1, -1) # RIGHT UP
+	elif rotation >= 67.5 && rotation < 112.5:
+		input_vector = Vector2(0, -1) # UP
+	elif rotation >= 112.5 && rotation < 157.5:
+		input_vector = Vector2(-1, -1) # LEFT UP
+	elif rotation >= 157.5 && rotation < 202.5:
+		input_vector = Vector2(-1, 0) # LEFT
+	elif rotation >= 202.5 && rotation < 247.5:
+		input_vector = Vector2(-1, 1) # LEFT DOWN
+	elif rotation >= 247.5 && rotation < 292.5:
+		input_vector = Vector2(0, 1) # DOWN
+	elif rotation >= 292.5 && rotation < 337.5:
+		input_vector = Vector2(1, 1) # RIGHT DOWN
+	
+	animationTree.set("parameters/Idle/blend_position", input_vector)
 
 func _on_Hurtbox_area_entered(area):
 	if dice.canAttack:

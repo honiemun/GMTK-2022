@@ -14,13 +14,15 @@ var hordes = [
 	[domino, domino, domino],
 	[domino, domino, domino, checkers],
 	[domino, domino, checkers, checkers, checkers],
-	[polycar],
-	[domino, domino, domino, domino, checkers, polycar],
-	[polycar, polycar, polycar, polycar]
+	[domino, domino, domino, domino, checkers],
+	[checkers, checkers, checkers, checkers, checkers],
+	[domino, domino, domino, domino, domino, domino, domino, domino, checkers, checkers, checkers]
 ]
 
 var currentHorde = 0
 var startingEnemies = 0
+
+signal new_horde
 
 func _ready():
 	spawn_new_horde()
@@ -29,9 +31,10 @@ func _process(delta):
 	if currentHorde + 1 <= len(hordes):
 		if !hordes[currentHorde]:
 			currentHorde += 1
-			spawn_new_horde()
+			emit_signal("new_horde")
 
 func spawn_new_horde():
+	
 	if currentHorde + 1 <= len(hordes):
 		startingEnemies = len(hordes[currentHorde])
 		for enemy in hordes[currentHorde]:
@@ -57,3 +60,7 @@ func generate_enemy_coords():
 func enemy_defeated():
 	hordes[currentHorde].pop_back()
 	print(str(len(hordes[currentHorde])) + "/" + str(startingEnemies))
+
+
+func _on_HordeAnimations_spawn_new_horde():
+	spawn_new_horde()
