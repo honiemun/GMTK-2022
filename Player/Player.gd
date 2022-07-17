@@ -3,6 +3,7 @@ extends KinematicBody2D
 enum {
 	MOVE,
 	HURT,
+	ATTACK,
 	DEAD
 }
 
@@ -12,9 +13,9 @@ var state          = MOVE
 var canBeHurt      = true
 var velocity       = Vector2.ZERO
 
-const max_speed    = 360
-const acceleration = 1000
-const friction     = 1000
+const max_speed    = 300
+const acceleration = 900
+const friction     = 900
 
 onready var dice = get_tree().get_nodes_in_group("Dice")[0]
 onready var camera = $Camera2D
@@ -28,6 +29,7 @@ var isKnocked = false
 var last_pos = global_position
 
 signal player_hit
+signal attack_starts
 
 func _ready():
 	set_process(true)
@@ -41,7 +43,6 @@ func _physics_process(delta):
 			move_state(delta)
 		HURT:
 			hurt_state(delta)
-
 # States
 
 func move_state(delta):
@@ -82,6 +83,7 @@ func _on_Hitbox_area_entered(area):
 				#health -= enemy.diceRoll
 				health -= 1
 				emit_signal("player_hit", health)
+				Global.camera.shake(0.3,8)
 				if health > 0:
 					state = HURT
 					$InvincibilityFrames.start()
@@ -97,3 +99,19 @@ func _on_InvincibilityFrames_timeout():
 
 func _on_Hurt_Endframe():
 	state = MOVE
+
+func _on_Dice_is_attacking():
+	#var input_vector = (Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"))
+	var input_vector
+	if get_global_mouse_position().x > global_position.x:
+		input_vector = 1
+	else:
+		input_vector = -1
+	animationTree.set("parameters/toss/blend_position", input_vector)
+	animationState.travel("toss")
+	state = ATTACK
+
+func attack_over():
+	state = MOVE
+	animationState.travel("walk")
+	emit_signal("attack_starts", $FauxDice)

@@ -62,16 +62,18 @@ func _physics_process(delta):
 			last_pos = global_position
 
 func _on_Hurtbox_area_entered(area):
-	if dice.canAttack:
-		diceRoll -= dice.rawDiceRoll
-		debugText.set_text(str(diceRoll))
-		
-		if diceRoll <= 0:
-			queue_free()
-			hordeHandler.enemy_defeated()
-		else:
-			isKnocked = true
-			knockback = dice.global_position.direction_to(global_position) * knockback_power
+	if dice:
+		if dice.canAttack:
+			diceRoll -= dice.rawDiceRoll
+			Global.camera.shake(0.3,6)
+			debugText.set_text(str(diceRoll))
+			
+			if diceRoll <= 0:
+				queue_free()
+				hordeHandler.enemy_defeated()
+			else:
+				isKnocked = true
+				knockback = dice.global_position.direction_to(global_position) * knockback_power
 
 # ATTACK ANIMATIONS
 

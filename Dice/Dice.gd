@@ -3,6 +3,7 @@ extends KinematicBody2D
 # STATE MACHINE
 enum {
 	FOLLOW,
+	ATTACK_ANIM,
 	ATTACK,
 	RETRACT
 }
@@ -38,8 +39,11 @@ var canAttack = false
 # OTHER NODES
 onready var player = get_tree().get_nodes_in_group("Player")[0]
 onready var sprite = $Sprite
+onready var face = $Sprite/Face
 onready var retractTimer = $RetractTimer
 onready var debugText = $DebugText
+
+signal is_attacking
 
 func _physics_process(delta):
 	
@@ -52,14 +56,14 @@ func _physics_process(delta):
 			retract_state(delta)
 			
 	if Input.is_action_just_pressed("retract") && state == ATTACK && t > ATTACK_DURATION:
+		sprite.animation = "Roll"
+		face.visible = false
 		retractTimer.start()
 		state = RETRACT
 		
 	if Input.is_action_just_pressed("attack") && state != ATTACK:
-		retractTimer.stop()
-		roll_dice()
-		define_bezier_variables()
-		state = ATTACK
+		sprite.visible = false
+		emit_signal("is_attacking")
 	
 	determine_attack()
 
@@ -71,7 +75,6 @@ func attack_state(delta):
 	move_towards_curve(delta)
 
 func retract_state(delta):
-	sprite.rotation += 8 * delta
 	follow_player(delta, FOLLOW_SPEED * 1.5)
 	
 	var playerPosition = player.position - Vector2(0, FOLLOW_OFFSET)
@@ -106,6 +109,12 @@ func determine_attack():
 		canAttack = true
 	else:
 		canAttack = false
+		sprite.animation = "Idle"
+		face.visible = true
+		if state != FOLLOW:
+			set_dice_animation()
+		else:
+			face.animation = "Face"
 
 func follow_player(delta, followSpeed):
 	position = position.linear_interpolate(player.position - Vector2(0, FOLLOW_OFFSET), delta * followSpeed)
@@ -125,3 +134,25 @@ func define_bezier_variables():
 	
 	var midPoint = Vector2((finalPosition.x - initialPosition.x) / 2 + initialPosition.x, (finalPosition.y - initialPosition.y) / 2 + initialPosition.y)
 	curvePosition = Vector2(midPoint.x, midPoint.y - 300)
+
+func set_dice_animation():
+	face.animation = "Dice"
+	if diceRoll:
+		face.frame = diceRoll - 1
+
+func _on_Player_attack_starts(fauxDice):
+	global_position = fauxDice.global_position
+	sprite.visible = true
+	state = ATTACK_ANIM
+	roll_dice()
+	Global.camera.shake(0.2,4)
+	set_dice_animation()
+	$Timer.start()
+
+
+func _on_Timer_timeout():
+	sprite.animation = "Roll"
+	face.visible = false
+	retractTimer.stop()
+	define_bezier_variables()
+	state = ATTACK

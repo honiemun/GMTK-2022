@@ -70,6 +70,7 @@ func _on_Hurtbox_area_entered(area):
 	if dice.canAttack:
 		diceRoll -= dice.rawDiceRoll
 		debugText.set_text(str(diceRoll))
+		Global.camera.shake(0.3,6)
 		
 		if diceRoll <= 0:
 			queue_free()

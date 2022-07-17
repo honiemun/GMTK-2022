@@ -1,8 +1,14 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=35 format=2]
 
 [ext_resource path="res://Player/player.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
 [ext_resource path="res://World/shadow.png" type="Texture" id=3]
+[ext_resource path="res://Player/expression-hit.png" type="Texture" id=4]
+[ext_resource path="res://Player/hand-grab.png" type="Texture" id=5]
+[ext_resource path="res://Dice/FauxDice.tscn" type="PackedScene" id=6]
+[ext_resource path="res://World/Camera2D.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Player/expression-neutral.png" type="Texture" id=8]
+[ext_resource path="res://Player/hand-splayed.png" type="Texture" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 12.0
@@ -110,6 +116,186 @@ tracks/7/keys = {
 "update": 0,
 "values": [ true ]
 }
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite/Hand-L:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -24, 18 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sprite/Hand-R:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 24, 18 ) ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("Sprite/Hand-R:centered")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("Sprite/Hand-L:texture")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 9 ) ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("Sprite/Hand-R:texture")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 9 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("Sprite/Face:texture")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ ExtResource( 8 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("Sprite/Hand-R:rotation_degrees")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("Sprite/Hand-L:rotation_degrees")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 0.0 ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("FauxDice/Eyes:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("Sprite/Face:modulate")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("FauxDice:animation")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "Idle" ]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("FauxDice:position")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -57 ) ]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("FauxDice:rotation_degrees")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 23.2 ]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("FauxDice:playing")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("FauxDice:visible")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=18]
 resource_name = "dead"
@@ -173,6 +359,30 @@ tracks/4/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, -9 ), Vector2( 0, -9 ), Vector2( 20, 27 ), Vector2( 69, 259 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite/Face:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("FauxDice:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=19]
@@ -265,6 +475,30 @@ tracks/6/keys = {
 "update": 1,
 "values": [ true, false, true, false, true, false, true ]
 }
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite/Face:texture")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("FauxDice:visible")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="Animation" id=20]
 resource_name = "idle"
@@ -293,6 +527,500 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, -43 ), Vector2( 0, -41 ), Vector2( 0, -43 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/Hand-L:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -19, 21 ), Vector2( -20, 23.1053 ), Vector2( -19, 21 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite/Hand-R:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 19, 21 ), Vector2( 20, 23.1053 ), Vector2( 19, 21 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite/Face:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 8 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite/Face:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("FauxDice:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=37]
+resource_name = "toss-left"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 22.0, 36.7, -36.8 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 16, -41 ), Vector2( 19, -41 ), Vector2( -24, -41 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/Hand-L:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -22.683, -8.09202 ), Vector2( -31.2099, 3.30747 ), Vector2( -29.5139, 15.9742 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite/Hand-R:centered")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite/Hand-L:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite/Hand-R:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite/Face:texture")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite/Hand-R:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -2.99685, -7.41747 ), Vector2( -13.6005, 0.159672 ), Vector2( -5.51395, 15.9952 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite/Hand-R:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 31.3 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sprite/Hand-L:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -58.8 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("FauxDice/Eyes:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.25, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ true, true, false ]
+}
+tracks/11/type = "method"
+tracks/11/path = NodePath(".")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_over"
+} ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("FauxDice:animation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "Idle", "Roll" ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("FauxDice:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.1, 0.15, 0.2, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 3, -57 ), Vector2( -2, -61 ), Vector2( -16, -49 ), Vector2( -24, -33 ), Vector2( -72, 0 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("FauxDice:rotation_degrees")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.1, 0.15, 0.25 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 23.2, 30.9, 23.2, 0.0 ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("FauxDice:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("FauxDice:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=36]
+resource_name = "toss-right"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ -22.0, -36.7, 36.8 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -16, -41 ), Vector2( -19, -41 ), Vector2( 24, -41 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite/Hand-L:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2.99685, -7.41747 ), Vector2( 2.99685, -7.41747 ), Vector2( 7.97072, 24.0097 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite/Hand-R:centered")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Sprite/Hand-L:texture")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Sprite/Hand-R:texture")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 5 ) ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("Sprite/Face:texture")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ ExtResource( 4 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("Sprite/Hand-R:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 21.2015, -8.59765 ), Vector2( 21.2015, -8.59765 ), Vector2( 29.5125, 15.9737 ) ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("Sprite/Hand-R:rotation_degrees")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 31.3 ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("Sprite/Hand-L:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, -58.8 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("FauxDice/Eyes:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.25, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ true, true, false ]
+}
+tracks/11/type = "method"
+tracks/11/path = NodePath(".")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_over"
+} ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("FauxDice:animation")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ "Idle", "Roll" ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("FauxDice:position")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.1, 0.15, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -3, -57 ), Vector2( -6, -61 ), Vector2( 16, -49 ), Vector2( 24, -33 ), Vector2( 72, 0 ) ]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("FauxDice:rotation_degrees")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/keys = {
+"times": PoolRealArray( 0, 0.1, 0.15, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -23.2, -30.9, 23.2, -11.6, 0.0 ]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("FauxDice:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("FauxDice:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=21]
@@ -359,6 +1087,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [ Vector2( 0, -9 ), Vector2( 0, -8 ) ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("FauxDice:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
 
 [sub_resource type="AnimationNodeAnimation" id=22]
 animation = "dead"
@@ -368,6 +1108,18 @@ animation = "hurt"
 
 [sub_resource type="AnimationNodeAnimation" id=24]
 animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=38]
+animation = "toss-left"
+
+[sub_resource type="AnimationNodeAnimation" id=39]
+animation = "toss-right"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=40]
+blend_point_0/node = SubResource( 38 )
+blend_point_0/pos = -1.0
+blend_point_1/node = SubResource( 39 )
+blend_point_1/pos = 1.0
 
 [sub_resource type="AnimationNodeAnimation" id=25]
 animation = "walk"
@@ -382,19 +1134,25 @@ animation = "walk"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=35]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+
 [sub_resource type="AnimationNodeStateMachine" id=31]
 states/dead/node = SubResource( 22 )
 states/dead/position = Vector2( 322, 77 )
 states/hurt/node = SubResource( 23 )
-states/hurt/position = Vector2( 55, 77 )
+states/hurt/position = Vector2( 54, 77 )
 states/idle/node = SubResource( 24 )
 states/idle/position = Vector2( 190, 77 )
+states/toss/node = SubResource( 40 )
+states/toss/position = Vector2( 190, 159 )
 states/walk/node = SubResource( 25 )
 states/walk/position = Vector2( 190, 0 )
-transitions = [ "idle", "hurt", SubResource( 29 ), "idle", "dead", SubResource( 30 ), "idle", "walk", SubResource( 33 ), "walk", "idle", SubResource( 34 ), "hurt", "idle", SubResource( 35 ) ]
+transitions = [ "idle", "hurt", SubResource( 29 ), "idle", "dead", SubResource( 30 ), "idle", "walk", SubResource( 33 ), "walk", "idle", SubResource( 34 ), "hurt", "idle", SubResource( 35 ), "idle", "toss", SubResource( 41 ), "toss", "idle", SubResource( 42 ) ]
 start_node = "idle"
 end_node = "dead"
-graph_offset = Vector2( -112, -62 )
+graph_offset = Vector2( -228, 47 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=32]
 
@@ -413,27 +1171,36 @@ texture = ExtResource( 3 )
 position = Vector2( 0, -43 )
 texture = ExtResource( 1 )
 
+[node name="Face" type="Sprite" parent="Sprite"]
+position = Vector2( -1.97519, -9.62327 )
+texture = ExtResource( 8 )
+
+[node name="Hand-L" type="Sprite" parent="Sprite"]
+position = Vector2( -24, 18 )
+texture = ExtResource( 9 )
+
+[node name="Hand-R" type="Sprite" parent="Sprite"]
+position = Vector2( 24, 18 )
+texture = ExtResource( 9 )
+flip_h = true
+
+[node name="FauxDice" parent="." instance=ExtResource( 6 )]
+visible = false
+position = Vector2( 0, -57 )
+rotation = 0.404916
+animation = "Idle"
+frame = 0
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( 0, -13 )
 rotation = 1.5708
 shape = SubResource( 1 )
 
-[node name="Camera2D" type="Camera2D" parent="."]
-current = true
-limit_left = -128
-limit_top = -960
-limit_right = 1472
-limit_bottom = 512
-limit_smoothed = true
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-smoothing_enabled = true
-drag_margin_left = 0.05
-drag_margin_top = 0.05
-drag_margin_right = 0.05
-drag_margin_bottom = 0.05
+[node name="Camera2D" parent="." instance=ExtResource( 7 )]
 
 [node name="Hitbox" type="Area2D" parent="."]
+visible = false
 collision_layer = 36
 collision_mask = 0
 
@@ -446,17 +1213,20 @@ anims/RESET = SubResource( 17 )
 anims/dead = SubResource( 18 )
 anims/hurt = SubResource( 19 )
 anims/idle = SubResource( 20 )
+anims/toss-left = SubResource( 37 )
+anims/toss-right = SubResource( 36 )
 anims/walk = SubResource( 21 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 31 )
 anim_player = NodePath("../AnimationPlayer")
-active = true
 parameters/playback = SubResource( 32 )
+parameters/toss/blend_position = -1.0
 
 [node name="InvincibilityFrames" type="Timer" parent="."]
 wait_time = 0.8
 one_shot = true
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="InvincibilityFrames" to="." method="_on_InvincibilityFrames_timeout"]

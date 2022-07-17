@@ -241,4 +241,6 @@ tile_data = PoolIntArray( -2490355, 1073741824, 0, -2490354, 1073741824, 0, -249
 visible = false
 polygon = PoolVector2Array( 128, -176, 128, 160, 48, 224, 56, 424, 432, 424, 624, 424, 624, 240, 1008, 240, 1008, 176, 1008, 40, 1008, -8, 976, -40, 944, -88, 928, -256, 752, -256, 704, -408, 1040, -408, 1048, -440, 1296, -448, 1296, -512, 1192, -568, 232, -560, 128, -472, 128, -336, 232, -336, 320, -408, 608, -400, 552, -248, 344, -240, 264, -184 )
 
+[connection signal="attack_starts" from="YSort/Player" to="YSort/Dice" method="_on_Player_attack_starts"]
 [connection signal="player_hit" from="YSort/Player" to="HUD/HealthLabel" method="_on_Player_player_hit"]
+[connection signal="is_attacking" from="YSort/Dice" to="YSort/Player" method="_on_Dice_is_attacking"]

@@ -66,6 +66,7 @@ func _on_Hurtbox_area_entered(area):
 	if dice.canAttack:
 		diceRoll -= 1
 		debugText.set_text(str(diceRoll))
+		Global.camera.shake(0.3,6)
 		remove_checkers_piece(diceRoll)
 		
 		if diceRoll <= 0:
