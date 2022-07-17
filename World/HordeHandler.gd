@@ -8,6 +8,7 @@ onready var spawnAreaPolygon = scene.get_node("World/SpawnArea")
 var domino   = "res://Enemies/Domino/Domino.tscn"
 var checkers = "res://Enemies/Checkers/Checkers.tscn"
 var polycar  = "res://Enemies/Poly Car/PolyCar.tscn"
+var hoop  = "res://Hoop/Hoop.tscn"
 var rng = RandomNumberGenerator.new()
 	
 var hordes = [

@@ -311,7 +311,7 @@ tracks/23/keys = {
 
 [sub_resource type="Animation" id=18]
 resource_name = "dead"
-length = 1.1
+length = 1.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Camera2D:zoom")
 tracks/0/interp = 1
@@ -407,6 +407,20 @@ tracks/7/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
+}
+tracks/8/type = "method"
+tracks/8/path = NodePath(".")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 1.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "restart"
+} ]
 }
 
 [sub_resource type="Animation" id=19]
@@ -1224,7 +1238,7 @@ states/walk/position = Vector2( 190, 0 )
 transitions = [ "idle", "hurt", SubResource( 29 ), "idle", "dead", SubResource( 30 ), "idle", "walk", SubResource( 33 ), "walk", "idle", SubResource( 34 ), "hurt", "idle", SubResource( 35 ), "idle", "toss", SubResource( 41 ), "toss", "idle", SubResource( 42 ) ]
 start_node = "idle"
 end_node = "dead"
-graph_offset = Vector2( -228, 47 )
+graph_offset = Vector2( -207, 10 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=32]
 

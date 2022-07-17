@@ -10,9 +10,9 @@ config_version=4
 
 [application]
 
-config/name="Sweep the Board"
+config/name="Board Sweepers [Jam Version]"
 config/description="A Honieware game for the GMTK Game Jam 2022."
-run/main_scene="res://World/World.tscn"
+run/main_scene="res://UI/Main Menu/Menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -28,7 +28,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/BitmapFontCutterPlus/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/BitmapFontCutterPlus/plugin.cfg", "res://addons/Trail/plugin.cfg", "res://addons/transitions/plugin.cfg" )
 
 [importer_defaults]
 

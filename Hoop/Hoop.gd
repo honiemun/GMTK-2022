@@ -9,11 +9,11 @@ onready var animationState = animationTree.get("parameters/playback")
 onready var face = $Multiplier
 onready var sprite = $AnimatedSprite
 
-onready var dice = get_parent().get_node("Dice")
+onready var dice = get_tree().get_nodes_in_group("Dice")[0]
 var canAdd = true
 
 func _ready():
-	addedToRoll = rng.randi_range(1,1)
+	addedToRoll = rng.randi_range(1,3)
 	animationTree.active = true
 	set_ring_colour()
 	set_multiplier()

@@ -115,3 +115,6 @@ func attack_over():
 	state = MOVE
 	animationState.travel("walk")
 	emit_signal("attack_starts", $FauxDice)
+
+func restart():
+	get_tree().reload_current_scene()
