@@ -1,10 +1,14 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Enemies/Checkers/legs.png" type="Texture" id=1]
 [ext_resource path="res://Enemies/Checkers/Checkers.gd" type="Script" id=2]
 [ext_resource path="res://World/Assets/Shadow.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Enemies/Checkers/checker-red.png" type="Texture" id=4]
 [ext_resource path="res://Enemies/Checkers/checker-black.png" type="Texture" id=5]
+[ext_resource path="res://addons/randomAudioStreamPlayer/random_audio_stream_player_2D.gd" type="Script" id=6]
+[ext_resource path="res://SFX/Checkers/017.wav" type="AudioStream" id=7]
+[ext_resource path="res://SFX/Checkers/023.wav" type="AudioStream" id=8]
+[ext_resource path="res://SFX/Checkers/009.wav" type="AudioStream" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 
@@ -321,6 +325,11 @@ start_node = "Walk"
 position = Vector2( 0, -35 )
 collision_mask = 9
 script = ExtResource( 2 )
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+volume_db = -11.055
+script = ExtResource( 6 )
+samples = [ ExtResource( 9 ), ExtResource( 7 ), ExtResource( 8 ) ]
 
 [node name="Shadow" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, 35 )

@@ -105,7 +105,7 @@ func move_towards_curve(delta):
 	position = q0.linear_interpolate(q1, min(t, 1.0))
 
 func determine_attack():
-	if state == ATTACK && t <= ATTACK_DURATION * 1.3 || state == RETRACT:
+	if state == ATTACK && t <= ATTACK_DURATION * 1.3 || state == RETRACT || state == ATTACK_ANIM:
 		canAttack = true
 	else:
 		canAttack = false
@@ -148,6 +148,7 @@ func _on_Player_attack_starts(fauxDice):
 	Global.camera.shake(0.2,4)
 	set_dice_animation()
 	$Timer.start()
+	$Hit.play()
 
 
 func _on_Timer_timeout():

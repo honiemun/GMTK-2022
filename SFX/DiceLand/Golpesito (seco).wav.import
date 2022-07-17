@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Golpesito (seco).wav-a4d91f88b38cba2c11a3410f78c5d1fe.sample"
+
+[deps]
+
+source_file="res://SFX/DiceLand/Golpesito (seco).wav"
+dest_files=[ "res://.import/Golpesito (seco).wav-a4d91f88b38cba2c11a3410f78c5d1fe.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

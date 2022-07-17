@@ -117,5 +117,19 @@ func attack_over():
 	animationState.travel("walk")
 	emit_signal("attack_starts", $FauxDice)
 
+# SFX
+
+func on_player_step():
+	$Steps.play()
+
+func on_player_hit():
+	$Hit.play()
+
+func on_player_is_kil():
+	#no
+	$Dead.play()
+
+# GAME OVER
+
 func restart():
 	get_tree().reload_current_scene()

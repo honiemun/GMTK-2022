@@ -71,6 +71,8 @@ func _on_Hurtbox_area_entered(area):
 			Global.camera.shake(0.3,6)
 			debugText.set_text(str(diceRoll))
 			
+			$Hit.play()
+			
 			if diceRoll <= 0:
 				queue_free()
 				hordeHandler.enemy_defeated()

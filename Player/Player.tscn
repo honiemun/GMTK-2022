@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=2]
+[gd_scene load_steps=48 format=2]
 
 [ext_resource path="res://Player/player.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.gd" type="Script" id=2]
@@ -9,6 +9,19 @@
 [ext_resource path="res://World/Camera2D.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Player/expression-neutral.png" type="Texture" id=8]
 [ext_resource path="res://Player/hand-splayed.png" type="Texture" id=9]
+[ext_resource path="res://SFX/Player/5.wav" type="AudioStream" id=10]
+[ext_resource path="res://SFX/Player/4.wav" type="AudioStream" id=11]
+[ext_resource path="res://SFX/Player/1.wav" type="AudioStream" id=12]
+[ext_resource path="res://SFX/Player/2.wav" type="AudioStream" id=13]
+[ext_resource path="res://SFX/Player/3.wav" type="AudioStream" id=14]
+[ext_resource path="res://addons/randomAudioStreamPlayer/random_audio_stream_player_2D.gd" type="Script" id=15]
+[ext_resource path="res://SFX/PlayerHit/Golpe destructor.wav" type="AudioStream" id=16]
+[ext_resource path="res://SFX/PlayerHit/Quebradura de ficha 2.wav" type="AudioStream" id=17]
+[ext_resource path="res://SFX/PlayerHit/Quebradura de ficha 3.wav" type="AudioStream" id=18]
+[ext_resource path="res://SFX/PlayerHit/Quebradura de ficha 4.wav" type="AudioStream" id=19]
+[ext_resource path="res://SFX/PlayerHit/Golpe destructor 2.wav" type="AudioStream" id=20]
+[ext_resource path="res://SFX/PlayerDead/Ficha caida 2.wav" type="AudioStream" id=21]
+[ext_resource path="res://SFX/PlayerDead/Ficha caida.wav" type="AudioStream" id=22]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 12.0
@@ -415,9 +428,12 @@ tracks/8/loop_wrap = true
 tracks/8/imported = false
 tracks/8/enabled = true
 tracks/8/keys = {
-"times": PoolRealArray( 1.5 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.5, 1.5 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "on_player_is_kil"
+}, {
 "args": [  ],
 "method": "restart"
 } ]
@@ -494,9 +510,12 @@ tracks/5/loop_wrap = true
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/keys = {
-"times": PoolRealArray( 0.3 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "on_player_hit"
+}, {
 "args": [  ],
 "method": "_on_Hurt_Endframe"
 } ]
@@ -1185,6 +1204,20 @@ tracks/6/keys = {
 "update": 1,
 "values": [ true ]
 }
+tracks/7/type = "method"
+tracks/7/path = NodePath(".")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "on_player_step"
+} ]
+}
 
 [sub_resource type="AnimationNodeAnimation" id=22]
 animation = "dead"
@@ -1311,6 +1344,21 @@ parameters/toss/blend_position = -1.0
 [node name="InvincibilityFrames" type="Timer" parent="."]
 wait_time = 0.8
 one_shot = true
+
+[node name="Steps" type="AudioStreamPlayer2D" parent="."]
+volume_db = -13.805
+script = ExtResource( 15 )
+samples = [ ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 11 ), ExtResource( 10 ) ]
+random_strategy = 2
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource( 15 )
+samples = [ ExtResource( 20 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ]
+random_strategy = 2
+
+[node name="Dead" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource( 15 )
+samples = [ ExtResource( 21 ), ExtResource( 22 ) ]
 
 [connection signal="area_entered" from="Hitbox" to="." method="_on_Hitbox_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

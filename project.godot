@@ -28,7 +28,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/BitmapFontCutterPlus/plugin.cfg", "res://addons/Trail/plugin.cfg", "res://addons/transitions/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/BitmapFontCutterPlus/plugin.cfg", "res://addons/Trail/plugin.cfg", "res://addons/google_fonts/plugin.cfg", "res://addons/randomAudioStreamPlayer/plugin.cfg", "res://addons/transitions/plugin.cfg" )
 
 [importer_defaults]
 

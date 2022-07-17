@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Ficha caida.wav-ac2b01a99f9d0bffbd8862910bb1031f.sample"
+
+[deps]
+
+source_file="res://SFX/PlayerDead/Ficha caida.wav"
+dest_files=[ "res://.import/Ficha caida.wav-ac2b01a99f9d0bffbd8862910bb1031f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

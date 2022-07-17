@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://UI/Main Menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://UI/placeholdermenubg.png" type="Texture" id=2]
 [ext_resource path="res://UI/logo.png" type="Texture" id=3]
 [ext_resource path="res://UI/madein48.png" type="Texture" id=4]
 [ext_resource path="res://Music/Title Screen.wav" type="AudioStream" id=5]
+[ext_resource path="res://UI/Main Menu/start-press.png" type="Texture" id=6]
+[ext_resource path="res://UI/Main Menu/start-neutral.png" type="Texture" id=7]
+[ext_resource path="res://UI/Main Menu/button-neutral.png" type="Texture" id=8]
+[ext_resource path="res://UI/Main Menu/button-press.png" type="Texture" id=9]
 
 [node name="Menu" type="Control"]
 anchor_right = 1.0
@@ -20,20 +24,24 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -187.0
-margin_top = -71.0
-margin_right = -32.0
+margin_left = -140.0
+margin_top = -86.0
+margin_right = -92.0
 
-[node name="Start" type="Button" parent="VBoxContainer"]
-margin_right = 155.0
-margin_bottom = 20.0
-text = "Start"
+[node name="Start" type="TextureButton" parent="VBoxContainer"]
+margin_right = 118.0
+margin_bottom = 29.0
+texture_normal = ExtResource( 7 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 6 )
 
-[node name="Postjam" type="Button" parent="VBoxContainer"]
-margin_top = 24.0
-margin_right = 155.0
-margin_bottom = 44.0
-text = "Post-jam Version"
+[node name="Postjam" type="TextureButton" parent="VBoxContainer"]
+margin_top = 33.0
+margin_right = 118.0
+margin_bottom = 62.0
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 9 )
+texture_hover = ExtResource( 9 )
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 624, 104 )
